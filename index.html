@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7e7f4">
+  <meta name="description" content="Una aventura amable para practicar la rutina del baño jugando.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>La Aventura de Sofía</title>
+</head>
+<body>
+  <div class="sparkle sparkle-a">✦</div><div class="sparkle sparkle-b">✧</div>
+  <header class="topbar">
+    <button class="brand" data-view="home" aria-label="Ir al inicio"><span class="brand-mark">🦄</span><span>La Aventura de Sofía</span></button>
+    <div class="top-actions">
+      <button class="sound-toggle" id="soundToggle" aria-pressed="true" title="Activar o silenciar sonidos">🔊 <span>Sonido</span></button>
+      <button class="adult-link" data-view="adult">👨‍👩‍👧 Familia</button>
+    </div>
+  </header>
+
+  <main id="app" class="app-shell" aria-live="polite">
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">UN REINO PARA DESCUBRIR</span>
+          <h1>¡Hola, Sofía! <span>✨</span></h1>
+          <p>¿Lista para una aventura mágica con Luna?</p>
+          <div class="hero-buttons"><button class="primary big" data-view="adventure">¡Vamos a jugar! <span>→</span></button><button class="secondary luna-talk-button" id="lunaTalk" type="button">🦄 Escuchar a Luna</button></div>
+        </div>
+        <div class="unicorn-scene princess-scene" aria-label="Sofía y Luna, su unicornio mágico">
+          <div class="luna-speech" id="lunaSpeech" role="status" aria-live="polite">¡Hola, Sofía! Soy Luna. ¿Jugamos juntas?</div>
+          <img class="princess-art" src="sofia-y-luna.png" alt="Ilustración de cuento de una pequeña princesa inspirada en Sofía abrazando a Luna, su unicornio mágico" fetchpriority="high">
+          <div class="scene-star star-one">⭐</div><div class="scene-star star-two">✨</div>
+          <div class="scene-caption">Sofía y Luna · amigas mágicas</div>
+        </div>
+      </div>
+      <div class="home-grid">
+        <button class="feature-card card-pink" data-view="signals"><span class="feature-icon">💗</span><span class="feature-title">Escucho mi cuerpo</span><span class="feature-sub">Descubre las señales</span><span class="card-arrow">Jugar →</span></button>
+        <button class="feature-card card-lilac" data-view="practice"><span class="feature-icon">🗣️</span><span class="feature-title">¡Quiero ir al baño!</span><span class="feature-sub">Practica cómo avisar</span><span class="card-arrow">Jugar →</span></button>
+        <button class="feature-card card-gold" data-view="routine"><span class="feature-icon">🧼</span><span class="feature-title">Mi rutina mágica</span><span class="feature-sub">Pasito a pasito</span><span class="card-arrow">Ver rutina →</span></button>
+        <button class="feature-card card-mint" data-view="garden"><span class="feature-icon">🌷</span><span class="feature-title">Mi jardín</span><span class="feature-sub">Mira lo que has descubierto</span><span class="card-arrow">Ver jardín →</span></button>
+      </div>
+      <p class="gentle-note">🌷 Cada intento cuenta. No pasa nada si hoy todavía estás aprendiendo.</p>
+    </section>
+
+    <section class="view" id="view-adventure">
+      <button class="back-link" data-view="home">← Volver al reino</button>
+      <div class="section-heading"><span class="eyebrow">ELIGE UNA AVENTURA</span><h1>¿Qué exploramos hoy?</h1><p>Podemos practicar juntos. Tú marcas el ritmo. 💜</p></div>
+      <div class="adventure-grid">
+        <button class="adventure-tile card-pink" data-view="signals"><span>🦋</span><b>Las señales del cuerpo</b><small>Escucha y descubre</small></button>
+        <button class="adventure-tile card-lilac" data-view="practice"><span>🗣️</span><b>Aprendo a avisar</b><small>¡Practiquemos la frase!</small></button>
+        <button class="adventure-tile card-gold" data-view="routine"><span>🧚</span><b>Los pasos mágicos</b><small>Una rutina sencilla</small></button>
+        <button class="adventure-tile card-mint" data-view="song"><span>🎵</span><b>La canción de Luna</b><small>Cantemos juntos</small></button>
+      </div>
+    </section>
+
+    <section class="view" id="view-signals">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="game-panel">
+        <button class="game-mascot mascot-talk" type="button" data-luna="Vamos a escuchar al cuerpo con calma. Si sientes ganas, puedes avisar a una persona adulta.">🦄<small>¡Luna puede hablar!</small></button><span class="eyebrow">JUEGO 1 · ESCUCHO MI CUERPO</span>
+        <h1>¿Qué nos dice el cuerpo?</h1>
+        <p class="lead">A veces el cuerpo nos avisa cuando queremos hacer pipí o popó. Podemos parar un momento y escuchar.</p>
+        <div class="choice-grid">
+          <button class="choice-card" data-feedback="curious"><span>🤔</span><b>Quiero escuchar</b><small>¿Siento ganas de ir?</small></button>
+          <button class="choice-card" data-feedback="adult"><span>🙋‍♀️</span><b>Quiero ayuda</b><small>Puedo avisar a alguien grande</small></button>
+        </div>
+        <div class="feedback hidden" id="signalFeedback"></div>
+        <button class="primary" id="signalComplete">¡Lo practiqué! 🌟</button>
+      </div>
+    </section>
+
+    <section class="view" id="view-practice">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="game-panel">
+        <button class="game-mascot mascot-talk" type="button" data-luna="Puedes decir: quiero ir al baño. También puedes pedir ayuda. ¡Practiquemos juntas!">🦄<small>Toca para escuchar a Luna</small></button><span class="eyebrow">JUEGO 2 · PRACTICO CÓMO AVISAR</span>
+        <h1>¡Vamos a decirlo juntos!</h1>
+        <p class="lead">Luna está jugando y nota que quizá necesita ir al baño. ¿Qué puede decir?</p>
+        <div class="speech-scene"><span class="speech-animal">🐰</span><span class="speech-bubble">¿Me ayudas a avisar?</span></div>
+        <div class="phrase-options">
+          <button class="phrase-button" data-correct="true">🗣️ «Quiero ir al baño»</button>
+          <button class="phrase-button" data-correct="false">🎠 «Sigo jugando y no aviso»</button>
+          <button class="phrase-button" data-correct="true">🙋 «¿Me ayudas, por favor?»</button>
+        </div>
+        <div class="feedback hidden" id="practiceFeedback"></div>
+        <button class="primary" id="practiceComplete">¡Practiqué mi frase! ⭐</button>
+      </div>
+    </section>
+
+    <section class="view" id="view-routine">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="section-heading"><span class="eyebrow">MI RUTINA MÁGICA</span><h1>Pasito a pasito 🌈</h1><p>Un adulto te acompaña. Puedes pedir ayuda cuando quieras.</p></div>
+      <div class="routine-list">
+        <div class="routine-step"><span>1</span><div class="routine-emoji">💭</div><div><b>Escucho mi cuerpo</b><small>¿Tengo ganas de ir?</small></div><input type="checkbox" aria-label="Paso 1 completado"></div>
+        <div class="routine-step"><span>2</span><div class="routine-emoji">🙋‍♀️</div><div><b>Aviso a un adulto</b><small>«Quiero ir al baño»</small></div><input type="checkbox" aria-label="Paso 2 completado"></div>
+        <div class="routine-step"><span>3</span><div class="routine-emoji">🚽</div><div><b>Vamos al baño</b><small>Con calma y con ayuda</small></div><input type="checkbox" aria-label="Paso 3 completado"></div>
+        <div class="routine-step"><span>4</span><div class="routine-emoji">🩲</div><div><b>Me visto</b><small>Un adulto puede ayudarme</small></div><input type="checkbox" aria-label="Paso 4 completado"></div>
+        <div class="routine-step"><span>5</span><div class="routine-emoji">🧼</div><div><b>Me lavo las manos</b><small>¡Agua y jabón!</small></div><input type="checkbox" aria-label="Paso 5 completado"></div>
+      </div>
+      <button class="primary centered" id="routineComplete">Terminamos de practicar 🌷</button>
+      <p class="gentle-note">No hace falta completar todos los pasos cada vez. Aprender toma tiempo.</p>
+    </section>
+
+    <section class="view" id="view-song">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="game-panel song-panel">
+        <div class="game-mascot">🎵🦄</div><span class="eyebrow">CANTEMOS JUNTOS</span>
+        <h1>La canción de Luna</h1>
+        <p class="lead">Una canción cortita para recordar que puedes escuchar tu cuerpo y pedir ayuda.</p>
+        <div class="song-lyrics" id="songLyrics">🎶 Si mi cuerpo me habla,<br>yo lo voy a escuchar.<br>Le aviso a alguien grande:<br>«¡Quiero ir al baño ya!» 🎶</div>
+        <button class="primary" id="singButton">🎵 Escuchar canción</button>
+        <p class="small-muted">La voz del navegador puede variar según el dispositivo. No se necesita enviar audio a internet.</p>
+      </div>
+    </section>
+
+    <section class="view" id="view-garden">
+      <button class="back-link" data-view="home">← Volver al reino</button>
+      <div class="section-heading"><span class="eyebrow">TU JARDÍN MÁGICO</span><h1>¡Mira todo lo que crece! 🌼</h1><p>Las estrellas son por practicar, aprender y pedir ayuda.</p></div>
+      <div class="garden-summary"><div class="garden-count"><span id="starCount">0</span><small>estrellas</small></div><div class="garden-count"><span id="flowerCount">0</span><small>flores</small></div><div class="garden-count"><span id="butterflyCount">0</span><small>mariposas</small></div></div>
+      <div class="garden-plot" id="gardenPlot"><span>🌱</span><span>🌷</span><span>🦋</span><span>🌼</span><span>✨</span></div>
+      <p class="gentle-note">Tu jardín crece cuando practicas. No necesitas hacerlo perfecto. 💗</p>
+    </section>
+
+    <section class="view" id="view-adult">
+      <div class="adult-header"><div><span class="eyebrow">ESPACIO PARA ADULTOS</span><h1>Modo familia</h1><p>Un espacio privado para acompañar sin presionar.</p></div><div class="adult-icon">🔐</div></div>
+      <div id="adultGate" class="adult-card">
+        <h2>Entrada para mamá y papá</h2><p>Resuelve esta suma para abrir el panel.</p>
+        <label for="gateAnswer" id="gateQuestion">¿Cuánto es 3 + 2?</label>
+        <div class="gate-row"><input id="gateAnswer" inputmode="numeric" type="number" min="0" max="20" placeholder="Respuesta"><button class="primary" id="unlockAdult">Entrar</button></div>
+        <p class="small-muted">Es una barrera sencilla para evitar toques accidentales, no una contraseña segura.</p>
+      </div>
+      <div id="adultContent" class="hidden">
+        <div class="adult-stats">
+          <div class="stat-card"><span>⭐</span><b id="adultStars">0</b><small>estrellas reunidas</small></div>
+          <div class="stat-card"><span>🌱</span><b id="practiceCount">0</b><small>prácticas registradas</small></div>
+          <div class="stat-card"><span>📅</span><b id="activeDays">0</b><small>días con actividad</small></div>
+        </div>
+        <div class="adult-card">
+          <h2>Registro amable</h2><p>Registra lo que observaste, sin convertirlo en una calificación.</p>
+          <label for="adultEvent">¿Qué pasó?</label>
+          <select id="adultEvent">
+            <option value="aviso">Avisó por sí misma</option>
+            <option value="practica">Practicó cómo avisar</option>
+            <option value="rutina">Hizo parte de la rutina</option>
+            <option value="ayuda">Pidió ayuda</option>
+            <option value="accidente">Hubo un accidente (sin penalización)</option>
+            <option value="observacion">Otra observación positiva o neutral</option>
+          </select>
+          <label for="adultNote">Nota opcional</label><textarea id="adultNote" maxlength="240" placeholder="Ej. Avisó antes de la merienda…"></textarea>
+          <button class="primary" id="saveLog">Guardar registro</button>
+          <p class="small-muted">Los registros se guardan solo en este navegador. Evita escribir información médica sensible.</p>
+        </div>
+        <div class="adult-card">
+          <h2>Rutina tranquila</h2>
+          <p>Usa estos ajustes como recordatorios para ti, no como órdenes para Sofía.</p>
+          <label for="reminderInterval">Intervalo orientativo para ofrecer ir al baño</label>
+          <select id="reminderInterval"><option value="60">Cada 60 minutos</option><option value="90" selected>Cada 90 minutos</option><option value="120">Cada 2 horas</option><option value="off">Sin recordatorio</option></select>
+          <label class="check-label"><input type="checkbox" id="reminderEnabled"> Mostrar recordatorio mientras la app está abierta</label>
+          <p class="small-muted">No hay notificaciones en segundo plano. Respeta las señales de Sofía y evita insistir si no quiere.</p>
+        </div>
+        <div class="adult-card">
+          <h2>Historial reciente</h2><div id="logList" class="log-list"><p class="small-muted">Todavía no hay registros.</p></div>
+          <button class="secondary" id="exportData">Exportar datos (JSON)</button>
+          <button class="secondary danger" id="clearData">Borrar todos los datos locales</button>
+        </div>
+        <button class="secondary centered" id="lockAdult">Cerrar modo familia</button>
+      </div>
+      <button class="back-link" data-view="home">← Volver al reino</button>
+    </section>
+  </main>
+
+  <div class="toast hidden" id="toast" role="status"></div>
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    <button data-view="home" class="nav-item selected"><span>🏰</span><small>Inicio</small></button>
+    <button data-view="adventure" class="nav-item"><span>🗺️</span><small>Aventura</small></button>
+    <button data-view="garden" class="nav-item"><span>🌷</span><small>Jardín</small></button>
+    <button data-view="adult"><span>👨‍👩‍👧</span><small>Familia</small></button>
+  </nav>
+  <script src="app.js"></script>
+</body>
+</html>
