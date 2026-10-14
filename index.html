@@ -40,7 +40,10 @@
         <button class="feature-card card-pink" data-view="signals"><span class="feature-icon">💗</span><span class="feature-title">Escucho mi cuerpo</span><span class="feature-sub">Descubre las señales</span><span class="card-arrow">Jugar →</span></button>
         <button class="feature-card card-lilac" data-view="practice"><span class="feature-icon">🗣️</span><span class="feature-title">¡Quiero ir al baño!</span><span class="feature-sub">Practica cómo avisar</span><span class="card-arrow">Jugar →</span></button>
         <button class="feature-card card-gold" data-view="routine"><span class="feature-icon">🧼</span><span class="feature-title">Mi rutina mágica</span><span class="feature-sub">Pasito a pasito</span><span class="card-arrow">Ver rutina →</span></button>
-        <button class="feature-card card-mint" data-view="garden"><span class="feature-icon">🌷</span><span class="feature-title">Mi jardín</span><span class="feature-sub">Mira lo que has descubierto</span><span class="card-arrow">Ver jardín →</span></button>
+        <button class="feature-card card-mint" data-view="garden"><span class="feature-icon">🌷</span><span class="feature-title">Jardín mágico</span><span class="feature-sub">Riega y descubre flores</span><span class="card-arrow">Jugar →</span></button>
+        <button class="feature-card card-pink" data-view="bath-mission"><span class="feature-icon">🚽</span><span class="feature-title">Misión del baño</span><span class="feature-sub">Pasitos con calma</span><span class="card-arrow">Acompáñame →</span></button>
+        <button class="feature-card card-lilac" data-view="pairs"><span class="feature-icon">⭐</span><span class="feature-title">Parejas mágicas</span><span class="feature-sub">Encuentra dibujos iguales</span><span class="card-arrow">Jugar →</span></button>
+        <button class="feature-card card-gold" data-view="wardrobe"><span class="feature-icon">👑</span><span class="feature-title">Vestidor de Sofía</span><span class="feature-sub">Elige tu look de princesa</span><span class="card-arrow">Probar →</span></button>
       </div>
       <p class="gentle-note">🌷 Cada intento cuenta. No pasa nada si hoy todavía estás aprendiendo.</p>
     </section>
@@ -53,6 +56,10 @@
         <button class="adventure-tile card-lilac" data-view="practice"><span>🗣️</span><b>Aprendo a avisar</b><small>¡Practiquemos la frase!</small></button>
         <button class="adventure-tile card-gold" data-view="routine"><span>🧚</span><b>Los pasos mágicos</b><small>Una rutina sencilla</small></button>
         <button class="adventure-tile card-mint" data-view="song"><span>🎵</span><b>La canción de Luna</b><small>Cantemos juntos</small></button>
+        <button class="adventure-tile card-pink" data-view="garden"><span>🌷</span><b>Jardín mágico</b><small>Riega flores y descubre</small></button>
+        <button class="adventure-tile card-gold" data-view="bath-mission"><span>🚽</span><b>Misión del baño</b><small>Pasitos con calma</small></button>
+        <button class="adventure-tile card-lilac" data-view="pairs"><span>⭐</span><b>Encuentra las parejas</b><small>Busca dibujos iguales</small></button>
+        <button class="adventure-tile card-mint" data-view="wardrobe"><span>👗</span><b>Vestidor de Sofía</b><small>¡Elige un vestido!</small></button>
       </div>
     </section>
 
@@ -63,8 +70,9 @@
         <h1>¿Qué nos dice el cuerpo?</h1>
         <p class="lead">A veces el cuerpo nos avisa cuando queremos hacer pipí o popó. Podemos parar un momento y escuchar.</p>
         <div class="choice-grid">
-          <button class="choice-card" data-feedback="curious"><span>🤔</span><b>Quiero escuchar</b><small>¿Siento ganas de ir?</small></button>
+          <button class="choice-card" data-feedback="curious"><span>💧</span><b>Siento algo en mi pancita</b><small>Puedo parar y escuchar</small></button>
           <button class="choice-card" data-feedback="adult"><span>🙋‍♀️</span><b>Quiero ayuda</b><small>Puedo avisar a alguien grande</small></button>
+          <button class="choice-card" data-feedback="unsure"><span>🌈</span><b>No estoy segura</b><small>Está bien, puedo preguntar</small></button>
         </div>
         <div class="feedback hidden" id="signalFeedback"></div>
         <button class="primary" id="signalComplete">¡Lo practiqué! 🌟</button>
@@ -119,7 +127,50 @@
       <div class="section-heading"><span class="eyebrow">TU JARDÍN MÁGICO</span><h1>¡Mira todo lo que crece! 🌼</h1><p>Las estrellas son por practicar, aprender y pedir ayuda.</p></div>
       <div class="garden-summary"><div class="garden-count"><span id="starCount">0</span><small>estrellas</small></div><div class="garden-count"><span id="flowerCount">0</span><small>flores</small></div><div class="garden-count"><span id="butterflyCount">0</span><small>mariposas</small></div></div>
       <div class="garden-plot" id="gardenPlot"><span>🌱</span><span>🌷</span><span>🦋</span><span>🌼</span><span>✨</span></div>
-      <p class="gentle-note">Tu jardín crece cuando practicas. No necesitas hacerlo perfecto. 💗</p>
+      <div class="garden-play"><div class="garden-message" id="gardenMessage">¡Tu jardín espera una gotita de magia!</div><button class="primary" id="waterGarden">💧 Regar una flor</button></div>
+      <p class="gentle-note">Tu jardín crece cuando juegas, exploras y practicas. No necesitas hacerlo perfecto. 💗</p>
+    </section>
+
+    <section class="view" id="view-bath-mission">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="game-panel">
+        <div class="game-mascot">🚽🌈</div><span class="eyebrow">AVENTURA CON CALMA</span>
+        <h1>La misión del baño</h1>
+        <p class="lead">Podemos practicar los pasos. Una persona grande te acompaña. No necesitas hacer pipí para terminar la aventura.</p>
+        <div class="mission-step" id="bathStep"><div class="mission-emoji" id="bathEmoji">💭</div><h2 id="bathTitle">1. Escucho mi cuerpo</h2><p id="bathText">Si siento ganas, puedo avisar.</p></div>
+        <div class="mission-progress" id="bathProgress" aria-label="Paso 1 de 5">⭐ ○ ○ ○ ○</div>
+        <div class="mission-actions"><button class="secondary" id="bathHelp">🙋 Pedir ayuda</button><button class="primary" id="bathNext">Siguiente pasito →</button></div>
+        <button class="secondary hidden" id="bathAgain">🔄 Practicar otra vez</button>
+        <p class="gentle-note">Si hoy no quieres, podemos parar. ¡Tú marcas el ritmo! 💗</p>
+      </div>
+    </section>
+
+    <section class="view" id="view-pairs">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="game-panel">
+        <div class="game-mascot">⭐🦋</div><span class="eyebrow">JUEGO DE MEMORIA</span><h1>Encuentra las parejas</h1>
+        <p class="lead">Toca dos tarjetas y encuentra los dibujos iguales.</p>
+        <div class="pairs-board" id="pairsBoard" aria-label="Tarjetas de memoria"></div>
+        <p class="feedback hidden" id="pairsFeedback" role="status"></p>
+        <div class="mission-actions"><button class="secondary" id="pairsReset">🔄 Jugar otra vez</button><button class="primary" id="pairsDone">¡Terminé de jugar! 🌟</button></div>
+        <p class="gentle-note">No pasa nada si no encuentras una pareja. ¡Podemos intentarlo otra vez!</p>
+      </div>
+    </section>
+
+    <section class="view" id="view-wardrobe">
+      <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+      <div class="game-panel wardrobe-panel">
+        <div class="game-mascot">👗👑</div><span class="eyebrow">EL VESTIDOR MÁGICO</span><h1>¿Qué te gustaría usar?</h1>
+        <p class="lead">Elige tu conjunto favorito para la aventura de hoy.</p>
+        <div class="avatar-doll" id="avatarDoll"><img src="sofia-y-luna.png" alt="Sofía y Luna" /><div class="outfit-label" id="outfitLabel">Princesa rosa</div></div>
+        <div class="outfit-options">
+          <button class="outfit-choice selected" data-outfit="rosa"><span>👗</span><b>Princesa rosa</b></button>
+          <button class="outfit-choice" data-outfit="lila"><span>🪻</span><b>Hada lila</b></button>
+          <button class="outfit-choice" data-outfit="dorado"><span>✨</span><b>Estrella dorada</b></button>
+          <button class="outfit-choice" data-outfit="arcoiris"><span>🌈</span><b>Arcoíris</b></button>
+        </div>
+        <div class="feedback" id="outfitFeedback" role="status">¡Qué bonito conjunto! Puedes cambiarlo cuando quieras.</div>
+      </div>
     </section>
 
     <section class="view" id="view-adult">

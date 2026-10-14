@@ -22,3 +22,32 @@
 
 /* Selector sencillo para probar la voz de Luna */
 .voice-picker{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-top:14px;max-width:520px}.voice-picker label{font-weight:900;color:#76548b}.voice-picker select{grid-column:1/-1;width:100%;padding:12px;border:2px solid #ead7f4;border-radius:14px;background:#fff;color:#674b7c;font:inherit}.voice-picker button{grid-column:1/-1;justify-self:start;min-height:42px}.voice-picker small{grid-column:1/-1;color:#947f9c;font-size:.78rem;line-height:1.4}@media(max-width:460px){.voice-picker button{width:100%}}
+
+
+/* Nuevas aventuras v5 */
+.garden-play{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:18px auto;padding:18px;background:rgba(255,255,255,.72);border:1px solid rgba(190,143,197,.25);border-radius:22px;max-width:680px}
+.garden-message{font-weight:700;color:#81518d;text-align:center}
+.mission-step{margin:22px auto 12px;padding:24px 18px;max-width:520px;border-radius:24px;background:linear-gradient(145deg,#fff4fb,#f3edff);border:2px solid #f0d9ef;text-align:center}
+.mission-emoji{font-size:clamp(3.5rem,12vw,5.5rem);line-height:1.3;animation:float-gentle 2.8s ease-in-out infinite}
+.mission-step h2{margin:10px 0 6px;color:#79528b}
+.mission-step p{margin:0 auto;max-width:360px;line-height:1.55}
+.mission-progress{text-align:center;font-size:1.45rem;letter-spacing:.12em;margin:18px 0}
+.mission-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+.pairs-board{display:grid;grid-template-columns:repeat(3,minmax(76px,112px));justify-content:center;gap:12px;margin:22px auto;max-width:400px}
+.pair-card{min-height:92px;border:2px solid #ead8f4;border-radius:20px;background:linear-gradient(145deg,#e9ddff,#fff0f8);font-size:2.35rem;box-shadow:0 4px 0 #d9c4e8;cursor:pointer;transition:transform .15s,background .15s}
+.pair-card:active{transform:scale(.96)}
+.pair-card.revealed{background:#fff;font-size:2.65rem}
+.pair-card.matched{background:#e6f8ed;border-color:#a8dec0}
+.avatar-doll{position:relative;max-width:320px;margin:18px auto;padding:12px;border-radius:28px;background:linear-gradient(145deg,#fff0f8,#eee7ff);text-align:center;overflow:hidden}
+.avatar-doll img{display:block;width:100%;max-height:300px;object-fit:contain;border-radius:20px}
+.outfit-label{margin-top:10px;display:inline-block;border-radius:999px;background:#fff;padding:9px 16px;font-weight:800;color:#79528b;box-shadow:0 3px 10px #8d6a9a20}
+.avatar-doll[data-outfit="rosa"]{background:linear-gradient(145deg,#ffe3f0,#fff4fa)}
+.avatar-doll[data-outfit="lila"]{background:linear-gradient(145deg,#e7dcff,#f8efff)}
+.avatar-doll[data-outfit="dorado"]{background:linear-gradient(145deg,#fff0bd,#fff9e8)}
+.avatar-doll[data-outfit="arcoiris"]{background:linear-gradient(145deg,#ffe2ef,#e7e3ff,#ddf8f2)}
+.outfit-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:520px;margin:18px auto}
+.outfit-choice{display:flex;align-items:center;gap:10px;text-align:left;padding:14px;border:2px solid #eadcf0;border-radius:18px;background:#fff;color:#654a76;min-height:66px;cursor:pointer}
+.outfit-choice span{font-size:1.7rem}.outfit-choice b{font-size:.95rem}
+.outfit-choice.selected{border-color:#b67fc4;background:#fbf0ff;box-shadow:0 0 0 2px #b67fc425}
+@keyframes float-gentle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(max-width:430px){.pairs-board{grid-template-columns:repeat(3,minmax(70px,1fr));gap:9px}.pair-card{min-height:82px}.outfit-options{gap:8px}.outfit-choice{padding:10px;gap:7px}.mission-actions button{flex:1 1 130px}}

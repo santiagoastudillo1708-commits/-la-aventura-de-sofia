@@ -1,6 +1,6 @@
 (() => {
   const KEY = "aventuraSofia.v1";
-  const defaultState = {stars:0, flowers:0, butterflies:0, practices:0, logs:[], sound:true, reminder:"90", reminderEnabled:false, lastActivity:null};
+  const defaultState = {stars:0, flowers:0, butterflies:0, practices:0, logs:[], sound:true, reminder:"90", reminderEnabled:false, lastActivity:null, gardenWaterings:0, outfit:"rosa"};
   let state = loadState();
   let gateNumber = [3,2];
   let audioContext = null;
@@ -116,7 +116,7 @@
   }
   $$("[data-feedback]").forEach(btn=>btn.addEventListener("click",()=>{
     const el=$("#signalFeedback");
-    el.textContent=btn.dataset.feedback==="curious"?"Podemos parar un momento y escuchar. Si tienes ganas, puedes avisar a mamá, papá o a quien te cuide. 💗":"¡Claro! Pedir ayuda es una gran idea. Puedes decir «quiero ir al baño» o usar la señal que practicaste con tu familia. 💜";
+    el.textContent=btn.dataset.feedback==="curious"?"Podemos parar un momento y escuchar. Si tienes ganas, puedes avisar a mamá, papá o a quien te cuide. 💗":btn.dataset.feedback==="unsure"?"No pasa nada si no estás segura. Puedes preguntar a una persona grande y descubrirlo juntas. 🌈":"¡Claro! Pedir ayuda es una gran idea. Puedes decir «quiero ir al baño» o usar la señal que practicaste con tu familia. 💜";
     el.classList.remove("hidden"); sound("gentle"); speak(el.textContent);
   }));
   $("#signalComplete").addEventListener("click",()=>{reward("flowers","¡Una flor para tu jardín! 🌷");});
@@ -145,6 +145,87 @@
       const next=()=>{if(i>=lines.length)return;const u=new SpeechSynthesisUtterance(lines[i++]);u.lang="es-MX";u.rate=.76;u.pitch=1.36;const v=spanishVoice();if(v){u.voice=v;u.lang=v.lang||"es-MX";}u.onend=()=>setTimeout(next,250);speechSynthesis.speak(u);};next();
     }else toast(lyrics);
   });
+  // Jardín mágico: interacción sencilla, repetible y sin castigos.
+  $("#waterGarden")?.addEventListener("click",()=>{
+    state.gardenWaterings=(state.gardenWaterings||0)+1;
+    state.flowers=(state.flowers||0)+1;
+    state.stars=(state.stars||0)+1;
+    state.lastActivity=new Date().toISOString();
+    const messages=["¡Mira cómo crece! 🌷","¡Una flor feliz gracias a ti! 🌼","¡La magia está en cuidar! 🌸","¡Llegó una mariposa al jardín! 🦋"];
+    $("#gardenMessage").textContent=messages[(state.gardenWaterings-1)%messages.length];
+    saveState();sound("success");speak("¡Qué bonito! Gracias por cuidar el jardín.");
+  });
+
+  // Misión del baño: pasos ilustrados. No requiere resultado fisiológico.
+  const bathSteps=[
+    {emoji:"💭",title:"1. Escucho mi cuerpo",text:"Si siento ganas, puedo parar y escuchar."},
+    {emoji:"🙋‍♀️",title:"2. Puedo avisar",text:"Puedo decir: «Quiero ir al baño»."},
+    {emoji:"🤝",title:"3. Pido compañía",text:"Una persona grande puede acompañarme."},
+    {emoji:"🚽",title:"4. Lo intento con calma",text:"Puedo sentarme si quiero. No pasa nada si no sale pipí."},
+    {emoji:"🧼",title:"5. Me lavo las manos",text:"Con ayuda, uso agua y jabón. ¡Listo!"}
+  ];
+  let bathIndex=0;
+  function renderBath(){
+    const step=bathSteps[bathIndex];
+    $("#bathEmoji").textContent=step.emoji;$("#bathTitle").textContent=step.title;$("#bathText").textContent=step.text;
+    $("#bathProgress").textContent=bathSteps.map((_,i)=>i<bathIndex?"⭐":i===bathIndex?"🌟":"○").join(" ");
+    $("#bathProgress").setAttribute("aria-label",`Paso ${bathIndex+1} de ${bathSteps.length}`);
+    $("#bathNext").textContent=bathIndex===bathSteps.length-1?"¡Terminar aventura! 🌷":"Siguiente pasito →";
+    $("#bathAgain").classList.add("hidden");
+  }
+  $("#bathNext")?.addEventListener("click",()=>{
+    if(bathIndex<bathSteps.length-1){bathIndex++;renderBath();sound("gentle");speak(bathSteps[bathIndex].text);}
+    else {reward("flowers","¡Aventura practicada! Una flor para tu jardín. 🌷");$("#bathTitle").textContent="¡Lo hicimos a tu ritmo!";$("#bathEmoji").textContent="🌈💗";$("#bathText").textContent="Puedes volver a practicar cuando quieras. No hace falta hacer pipí para celebrar.";$("#bathProgress").textContent="⭐ ⭐ ⭐ ⭐ ⭐";$("#bathNext").classList.add("hidden");$("#bathAgain").classList.remove("hidden");}
+  });
+  $("#bathHelp")?.addEventListener("click",()=>speak("¡Claro que sí! Puedes decir: ¿me ayudas, por favor? Una persona grande puede acompañarte."));
+  $("#bathAgain")?.addEventListener("click",()=>{bathIndex=0;$("#bathNext").classList.remove("hidden");renderBath();});
+
+  // Juego de parejas de 3 años: solo 3 pares y sin cronómetro.
+  const pairFaces=["🦄","🌷","⭐"];
+  let pairDeck=[], pairOpen=[], pairMatched=new Set(), pairLock=false;
+  function resetPairs(){
+    pairDeck=[...pairFaces,...pairFaces].map((face,i)=>({face,id:i})).sort(()=>Math.random()-.5);
+    pairOpen=[];pairMatched=new Set();pairLock=false;renderPairs();
+    $("#pairsFeedback").classList.add("hidden");
+  }
+  function renderPairs(){
+    $("#pairsBoard").innerHTML=pairDeck.map((card,i)=>{
+      const open=pairOpen.includes(i)||pairMatched.has(card.face);
+      return `<button class="pair-card ${open?"revealed":""} ${pairMatched.has(card.face)?"matched":""}" data-pair-index="${i}" aria-label="${open?card.face:"Tarjeta tapada"}">${open?card.face:"❔"}</button>`;
+    }).join("");
+  }
+  $("#pairsBoard")?.addEventListener("click",e=>{
+    const btn=e.target.closest("[data-pair-index]");if(!btn||pairLock)return;
+    const i=Number(btn.dataset.pairIndex),face=pairDeck[i].face;
+    if(pairOpen.includes(i)||pairMatched.has(face))return;
+    pairOpen.push(i);renderPairs();sound("tap");
+    if(pairOpen.length===2){
+      const [a,b]=pairOpen;
+      if(pairDeck[a].face===pairDeck[b].face){
+        pairMatched.add(face);pairOpen=[];renderPairs();sound("success");
+        $("#pairsFeedback").textContent="¡Encontraste una pareja! ✨";$("#pairsFeedback").classList.remove("hidden");
+        if(pairMatched.size===pairFaces.length){$("#pairsFeedback").textContent="¡Encontraste todas las parejas! ¡Buen trabajo jugando! 🌟";}
+      }else{
+        pairLock=true;setTimeout(()=>{pairOpen=[];pairLock=false;renderPairs();},850);
+      }
+    }
+  });
+  $("#pairsReset")?.addEventListener("click",resetPairs);
+  $("#pairsDone")?.addEventListener("click",()=>reward("butterflies","¡Gracias por jugar! Una mariposa para ti. 🦋"));
+  resetPairs();
+
+  // Vestidor: cambiar los colores y guardar la elección localmente.
+  const outfitNames={rosa:"Princesa rosa",lila:"Hada lila",dorado:"Estrella dorada",arcoiris:"Arcoíris mágico"};
+  function setOutfit(name){
+    state.outfit=name;$("#outfitLabel").textContent=outfitNames[name]||outfitNames.rosa;
+    const doll=$("#avatarDoll");doll.dataset.outfit=name;
+    $$(".outfit-choice").forEach(b=>b.classList.toggle("selected",b.dataset.outfit===name));
+    $("#outfitFeedback").textContent=`¡${outfitNames[name]}! Puedes cambiar tu conjunto cuando quieras. 💖`;
+    try{localStorage.setItem("aventuraSofia.outfit",name);}catch{}
+  }
+  $$(".outfit-choice").forEach(b=>b.addEventListener("click",()=>{setOutfit(b.dataset.outfit);sound("success");speak(`¡Qué bonito! ${outfitNames[b.dataset.outfit]}.`);}));
+  setOutfit(state.outfit||"rosa");
+
   function updateGarden(){
     $("#starCount").textContent=state.stars; $("#flowerCount").textContent=state.flowers; $("#butterflyCount").textContent=state.butterflies;
     const plot=$("#gardenPlot"); const bits=["🌷","🌼","🌸","🦋","✨","🌈","🐰","⭐","🌺"];
