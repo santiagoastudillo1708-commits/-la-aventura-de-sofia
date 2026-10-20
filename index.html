@@ -44,7 +44,12 @@
         <button class="feature-card card-pink" data-view="bath-mission"><span class="feature-icon">🚽</span><span class="feature-title">Misión del baño</span><span class="feature-sub">Pasitos con calma</span><span class="card-arrow">Acompáñame →</span></button>
         <button class="feature-card card-lilac" data-view="pairs"><span class="feature-icon">⭐</span><span class="feature-title">Parejas mágicas</span><span class="feature-sub">Encuentra dibujos iguales</span><span class="card-arrow">Jugar →</span></button>
         <button class="feature-card card-gold" data-view="wardrobe"><span class="feature-icon">👑</span><span class="feature-title">Vestidor de Sofía</span><span class="feature-sub">Elige tu look de princesa</span><span class="card-arrow">Probar →</span></button>
+        <button class="feature-card card-mint" data-view="map"><span class="feature-icon">🗺️</span><span class="feature-title">Mapa del reino</span><span class="feature-sub">Elige dónde explorar</span><span class="card-arrow">Explorar →</span></button>
       </div>
+      <section class="progress-card" aria-label="Tu aventura">
+        <div><span class="eyebrow">TU AVENTURA</span><h2>¡Mira todo lo que has descubierto!</h2><p>Las estrellas celebran tus juegos e intentos.</p></div>
+        <div class="progress-stats"><div><b id="homeStars">0</b><span>⭐ estrellas</span></div><div><b id="homeFlowers">0</b><span>🌷 flores</span></div><div><b id="homePractices">0</b><span>💗 aventuras</span></div></div>
+      </section>
       <p class="gentle-note">🌷 Cada intento cuenta. No pasa nada si hoy todavía estás aprendiendo.</p>
     </section>
 
@@ -52,6 +57,7 @@
       <button class="back-link" data-view="home">← Volver al reino</button>
       <div class="section-heading"><span class="eyebrow">ELIGE UNA AVENTURA</span><h1>¿Qué exploramos hoy?</h1><p>Podemos practicar juntos. Tú marcas el ritmo. 💜</p></div>
       <div class="adventure-grid">
+        <button class="adventure-tile card-gold" data-view="map"><span>🗺️</span><b>Mapa del reino</b><small>¿Adónde vamos hoy?</small></button>
         <button class="adventure-tile card-pink" data-view="signals"><span>🦋</span><b>Las señales del cuerpo</b><small>Escucha y descubre</small></button>
         <button class="adventure-tile card-lilac" data-view="practice"><span>🗣️</span><b>Aprendo a avisar</b><small>¡Practiquemos la frase!</small></button>
         <button class="adventure-tile card-gold" data-view="routine"><span>🧚</span><b>Los pasos mágicos</b><small>Una rutina sencilla</small></button>
@@ -61,6 +67,21 @@
         <button class="adventure-tile card-lilac" data-view="pairs"><span>⭐</span><b>Encuentra las parejas</b><small>Busca dibujos iguales</small></button>
         <button class="adventure-tile card-mint" data-view="wardrobe"><span>👗</span><b>Vestidor de Sofía</b><small>¡Elige un vestido!</small></button>
       </div>
+    </section>
+
+    <section class="view" id="view-map">
+      <button class="back-link" data-view="home">← Volver al reino</button>
+      <div class="section-heading"><span class="eyebrow">EL MAPA MÁGICO</span><h1>¿Adónde vamos, Sofía?</h1><p>Elige un lugar y empieza a explorar. Puedes volver cuando quieras. 💜</p></div>
+      <div class="kingdom-map">
+        <div class="map-path" aria-hidden="true">〰️ ✨ 〰️ 🌈 〰️</div>
+        <button class="map-place castle-place" data-view="adventure"><span>🏰</span><b>El castillo</b><small>Ver aventuras</small></button>
+        <button class="map-place garden-place" data-view="garden"><span>🌷</span><b>Jardín mágico</b><small>Regar flores</small></button>
+        <button class="map-place forest-place" data-view="pairs"><span>🐰</span><b>Bosque amigo</b><small>Buscar parejas</small></button>
+        <button class="map-place rainbow-place" data-view="signals"><span>🌈</span><b>Arcoíris de señales</b><small>Escuchar el cuerpo</small></button>
+        <button class="map-place tower-place" data-view="wardrobe"><span>👑</span><b>Torre de vestidos</b><small>Elegir conjunto</small></button>
+        <button class="map-place bath-place" data-view="bath-mission"><span>🚽</span><b>Rincón de calma</b><small>Practicar con ayuda</small></button>
+      </div>
+      <p class="gentle-note">✨ Todos los lugares están disponibles. No hay niveles que perder ni caminos bloqueados.</p>
     </section>
 
     <section class="view" id="view-signals">

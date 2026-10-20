@@ -66,3 +66,14 @@ Esta versión añade:
 - Vestidor de Sofía con cuatro temas visuales y elección guardada en el dispositivo.
 
 Las recompensas celebran explorar y practicar, nunca el resultado fisiológico. La aplicación continúa guardando datos en el navegador local. Para publicar la actualización, reemplaza los archivos del sitio con los de esta carpeta, incluyendo `sofia-y-luna.png`, `styles.css`, `app.js`, `index.html` y `sw.js`.
+
+
+## Versión 6: mejora integral
+Además de las actividades de la versión 5, esta versión añade:
+- Mapa interactivo del reino con accesos al castillo, jardín, bosque de parejas, señales del cuerpo, vestidor y misión del baño.
+- Resumen de estrellas, flores y aventuras en la pantalla principal, actualizado con los datos locales.
+- Mejoras visuales adaptables a pantallas pequeñas, botones grandes y tarjetas con animaciones suaves.
+- Todos los lugares están disponibles desde el principio: no se bloquea contenido por resultados de baño.
+- Nueva caché de service worker para que el navegador detecte la actualización.
+
+Publicación: reemplaza los archivos del sitio en la raíz del mismo repositorio de GitHub Pages. Incluye `index.html`, `styles.css`, `app.js`, `sw.js`, `manifest.webmanifest`, `icon.svg` y `sofia-y-luna.png`. Los datos guardados permanecen en el almacenamiento local del navegador; no hay sincronización entre dispositivos.

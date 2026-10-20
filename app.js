@@ -14,7 +14,7 @@
   }
   function saveState(){
     try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
-    updateGarden(); updateAdultStats(); renderLogs();
+    updateGarden(); updateAdultStats(); renderLogs(); updateHomeProgress();
   }
   function today(){ return new Date().toLocaleDateString("es-MX",{year:"numeric",month:"short",day:"numeric"}); }
   function toast(message){
@@ -226,6 +226,12 @@
   $$(".outfit-choice").forEach(b=>b.addEventListener("click",()=>{setOutfit(b.dataset.outfit);sound("success");speak(`¡Qué bonito! ${outfitNames[b.dataset.outfit]}.`);}));
   setOutfit(state.outfit||"rosa");
 
+  function updateHomeProgress(){
+    const stars=$("#homeStars"),flowers=$("#homeFlowers"),practices=$("#homePractices");
+    if(stars)stars.textContent=state.stars||0;
+    if(flowers)flowers.textContent=state.flowers||0;
+    if(practices)practices.textContent=state.practices||0;
+  }
   function updateGarden(){
     $("#starCount").textContent=state.stars; $("#flowerCount").textContent=state.flowers; $("#butterflyCount").textContent=state.butterflies;
     const plot=$("#gardenPlot"); const bits=["🌷","🌼","🌸","🦋","✨","🌈","🐰","⭐","🌺"];
@@ -276,5 +282,5 @@
   });
   if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
   $("#soundToggle").innerHTML=state.sound?"🔊 <span>Sonido</span>":"🔇 <span>Silencio</span>";$("#soundToggle").setAttribute("aria-pressed",String(state.sound));
-  updateGarden();updateAdultStats();renderLogs();
+  updateGarden();updateAdultStats();renderLogs();updateHomeProgress();
 })();
