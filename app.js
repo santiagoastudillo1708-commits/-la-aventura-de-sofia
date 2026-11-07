@@ -1,6 +1,6 @@
 (() => {
   const KEY = "aventuraSofia.v1";
-  const defaultState = {stars:0, flowers:0, butterflies:0, practices:0, logs:[], sound:true, reminder:"90", reminderEnabled:false, lastActivity:null, gardenWaterings:0, outfit:"rosa"};
+  const defaultState = {stars:0, flowers:0, butterflies:0, practices:0, logs:[], sound:true, reminder:"90", reminderEnabled:false, lastActivity:null, gardenWaterings:0, outfit:"rosa", wardrobe:{dress:"dress-rose",tiara:"tiara-heart",hair:"hair-up",gloves:"gloves-pearl",necklace:"necklace-heart",earrings:"earrings-star",shoes:"shoes-rose"}, savedLooks:[]};
   let state = loadState();
   let gateNumber = [3,2];
   let audioContext = null;
@@ -214,17 +214,69 @@
   $("#pairsDone")?.addEventListener("click",()=>reward("butterflies","¡Gracias por jugar! Una mariposa para ti. 🦋"));
   resetPairs();
 
-  // Vestidor: cambiar los colores y guardar la elección localmente.
-  const outfitNames={rosa:"Princesa rosa",lila:"Hada lila",dorado:"Estrella dorada",arcoiris:"Arcoíris mágico"};
-  function setOutfit(name){
-    state.outfit=name;$("#outfitLabel").textContent=outfitNames[name]||outfitNames.rosa;
-    const doll=$("#avatarDoll");doll.dataset.outfit=name;
-    $$(".outfit-choice").forEach(b=>b.classList.toggle("selected",b.dataset.outfit===name));
-    $("#outfitFeedback").textContent=`¡${outfitNames[name]}! Puedes cambiar tu conjunto cuando quieras. 💖`;
-    try{localStorage.setItem("aventuraSofia.outfit",name);}catch{}
+  // Vestidor V7: prendas y accesorios independientes, combinables y guardables.
+  const wardrobeCatalog = {
+    dress: [
+      ["dress-rose","Vestido pétalo","🌸"],["dress-lilac","Vestido lavanda","🪻"],
+      ["dress-sky","Vestido cielo","🩵"],["dress-gold","Vestido estelar","✨"],
+      ["dress-rainbow","Vestido arcoíris","🌈"],["dress-mint","Vestido jardín","🌿"],
+      ["dress-midnight","Vestido noche","🌙"],["dress-butterfly","Vestido mariposa","🦋"],
+      ["dress-pearl","Vestido perla","🤍"],["dress-royal","Vestido real","👑"]
+    ],
+    tiara: [["tiara-heart","Corona corazón","💗"],["tiara-gold","Tiara dorada","👑"],["tiara-flower","Flores","🌸"],["tiara-star","Estrellas","⭐"],["tiara-crystal","Cristales","💎"]],
+    hair: [["hair-up","Moño alto","🎀"],["hair-long","Ondas largas","💫"],["hair-braid","Trenza real","🌷"],["hair-curls","Rizos mágicos","🪄"]],
+    gloves: [["gloves-pearl","Guantes perla","🤍"],["gloves-pink","Guantes rosa","🩷"],["gloves-lilac","Guantes lila","🪻"],["gloves-gold","Guantes dorados","✨"]],
+    necklace: [["necklace-heart","Collar corazón","💗"],["necklace-pearl","Perlas","🤍"],["necklace-star","Estrella","⭐"],["necklace-rainbow","Arcoíris","🌈"]],
+    earrings: [["earrings-star","Aretes estrella","⭐"],["earrings-heart","Aretes corazón","💗"],["earrings-pearl","Aretes perla","🤍"],["earrings-flower","Aretes flor","🌸"]],
+    shoes: [["shoes-rose","Zapatitos rosa","🩰"],["shoes-glass","Zapatillas cristal","💎"],["shoes-gold","Zapatos dorados","✨"],["shoes-lilac","Zapatos lila","🪻"]]
+  };
+  const wardrobeLabels={dress:"Vestidos",tiara:"Tiaras",hair:"Peinados",gloves:"Guantes",necklace:"Collares",earrings:"Aretes",shoes:"Zapatos"};
+  const wardrobeLayerIds=["dress","hair","gloves","necklace","earrings","shoes","tiara"];
+  let activeWardrobeCategory="dress";
+  function wardrobeAsset(item){return item==="none"?"":`wardrobe/${item}.svg`;}
+  function renderDoll(){
+    const w=state.wardrobe||defaultState.wardrobe;
+    wardrobeLayerIds.forEach(slot=>{
+      const img=$(`#layer-${slot}`);
+      if(img){const item=w[slot]||"none";img.src=wardrobeAsset(item);img.classList.toggle("hidden",item==="none");img.alt=item==="none"?"":`${slot} ${item}`;}
+    });
+    const title=(wardrobeCatalog.dress.find(x=>x[0]===w.dress)||[])[1]||"Mi creación";
+    $("#outfitLabel").textContent=title;
+    $$(".wardrobe-tab").forEach(b=>b.classList.toggle("selected",b.dataset.category===activeWardrobeCategory));
+    renderWardrobeItems();
   }
-  $$(".outfit-choice").forEach(b=>b.addEventListener("click",()=>{setOutfit(b.dataset.outfit);sound("success");speak(`¡Qué bonito! ${outfitNames[b.dataset.outfit]}.`);}));
-  setOutfit(state.outfit||"rosa");
+  function renderWardrobeItems(){
+    const list=$("#wardrobeItems"); if(!list)return;
+    const items=wardrobeCatalog[activeWardrobeCategory]||[];
+    list.innerHTML=`<button class="wardrobe-item ${!(state.wardrobe||{} )[activeWardrobeCategory]?"selected":""}" data-item="none"><span>✖️</span><b>Sin accesorio</b></button>`+
+      items.map(([id,label,emoji])=>`<button class="wardrobe-item ${state.wardrobe?.[activeWardrobeCategory]===id?"selected":""}" data-item="${id}"><span>${emoji}</span><b>${label}</b></button>`).join("");
+  }
+  function selectWardrobeItem(id){
+    const slot=activeWardrobeCategory;
+    state.wardrobe=state.wardrobe||{...defaultState.wardrobe};
+    state.wardrobe[slot]=id;
+    if(slot==="dress")state.outfit=id;
+    renderDoll();saveState();sound("gentle");
+    const chosen=(wardrobeCatalog[slot]||[]).find(x=>x[0]===id);
+    $("#outfitFeedback").textContent=id==="none"?"¡Listo! Dejamos esta parte sin accesorio.":`¡Qué bonito! ${chosen?.[1]||"Tu elección"} queda genial. 💖`;
+  }
+  function saveLook(){
+    state.savedLooks=state.savedLooks||[];
+    const look={...state.wardrobe,name:`Conjunto ${state.savedLooks.length+1}`,savedAt:new Date().toISOString()};
+    state.savedLooks.unshift(look);state.savedLooks=state.savedLooks.slice(0,12);saveState();renderSavedLooks();
+    $("#outfitFeedback").textContent="¡Conjunto guardado en tu armario! 💖";
+    sound("success");speak("¡Tu conjunto quedó guardado en el armario!");
+  }
+  function renderSavedLooks(){
+    const el=$("#savedLooks");if(!el)return;
+    const looks=state.savedLooks||[];
+    el.innerHTML=looks.length?looks.map((look,i)=>`<button class="saved-look" data-look="${i}"><span>👑</span><b>${escapeHtml(look.name||"Mi conjunto")}</b><small>Tocar para usar</small></button>`).join(""):'<p class="small-muted">Aquí aparecerán los conjuntos que guardes. ✨</p>';
+  }
+  $$(".wardrobe-tab").forEach(b=>b.addEventListener("click",()=>{activeWardrobeCategory=b.dataset.category;renderDoll();sound("tap");}));
+  $("#wardrobeItems")?.addEventListener("click",e=>{const b=e.target.closest("[data-item]");if(b)selectWardrobeItem(b.dataset.item);});
+  $("#saveLook")?.addEventListener("click",saveLook);
+  $("#savedLooks")?.addEventListener("click",e=>{const b=e.target.closest("[data-look]");if(!b)return;const look=state.savedLooks[Number(b.dataset.look)];if(!look)return;state.wardrobe={dress:look.dress,tiara:look.tiara,hair:look.hair,gloves:look.gloves,necklace:look.necklace,earrings:look.earrings,shoes:look.shoes};renderDoll();saveState();toast("¡Tu conjunto favorito está de vuelta! 💜");sound("success");});
+  renderDoll();renderSavedLooks();
 
   function updateHomeProgress(){
     const stars=$("#homeStars"),flowers=$("#homeFlowers"),practices=$("#homePractices");

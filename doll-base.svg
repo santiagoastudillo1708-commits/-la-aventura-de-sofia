@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700">
+<defs>
+ <linearGradient id="skin" x2="0" y2="1"><stop stop-color="#f8d1b6"/><stop offset="1" stop-color="#e9a985"/></linearGradient>
+ <linearGradient id="hair" x2="0" y2="1"><stop stop-color="#68402f"/><stop offset="1" stop-color="#38251f"/></linearGradient>
+ <linearGradient id="shoe" x2="0" y2="1"><stop stop-color="#f4b6cb"/><stop offset="1" stop-color="#d96f9b"/></linearGradient>
+</defs>
+<!-- legs -->
+<path d="M151 470 Q145 535 150 602 Q151 626 169 627 Q185 625 183 606 L190 492Z" fill="url(#skin)" stroke="#b97861" stroke-width="2"/>
+<path d="M215 475 Q220 540 216 605 Q215 626 234 628 Q251 627 249 606 L251 490Z" fill="url(#skin)" stroke="#b97861" stroke-width="2"/>
+<!-- shoes -->
+<path d="M145 600 Q165 590 183 608 L190 637 Q177 650 145 642 Q132 631 145 600Z" fill="url(#shoe)" stroke="#b75e88" stroke-width="3"/>
+<path d="M214 605 Q233 590 251 607 L266 636 Q252 650 220 642 Q205 631 214 605Z" fill="url(#shoe)" stroke="#b75e88" stroke-width="3"/>
+<!-- arms behind torso -->
+<path d="M139 250 Q111 282 102 354 Q96 390 119 398 Q137 399 143 375 L171 303Z" fill="url(#skin)" stroke="#c88970" stroke-width="2"/>
+<path d="M260 250 Q289 278 299 348 Q306 383 282 397 Q264 400 258 375 L229 303Z" fill="url(#skin)" stroke="#c88970" stroke-width="2"/>
+<!-- neck and body -->
+<path d="M171 204 L171 250 Q199 271 229 250 L228 204Z" fill="url(#skin)"/>
+<path d="M144 246 Q164 225 199 230 Q237 226 257 249 L270 422 Q249 463 201 467 Q151 464 130 422Z" fill="url(#skin)" stroke="#c88970" stroke-width="2"/>
+<!-- simple leotard -->
+<path d="M148 254 Q171 235 199 245 Q230 235 253 254 L242 342 Q201 369 158 342Z" fill="#fff0f5" stroke="#d9a4bb" stroke-width="2"/>
+<path d="M158 342 Q200 361 242 342 L253 445 Q203 467 145 445Z" fill="#f8e7f1" stroke="#d9a4bb" stroke-width="2"/>
+<!-- head -->
+<ellipse cx="200" cy="145" rx="79" ry="91" fill="url(#skin)" stroke="#c88970" stroke-width="2"/>
+<!-- hair back -->
+<path d="M119 158 Q103 65 170 43 Q240 17 278 81 Q298 126 274 191 Q266 128 239 111 Q205 137 154 119 Q140 142 135 190Z" fill="url(#hair)"/>
+<!-- hairline and buns -->
+<path d="M123 121 Q129 46 197 45 Q262 42 279 117 Q249 91 224 89 Q189 112 150 96Z" fill="url(#hair)"/>
+<circle cx="133" cy="78" r="29" fill="url(#hair)"/><circle cx="264" cy="74" r="26" fill="url(#hair)"/>
+<!-- face details -->
+<path d="M159 145 Q176 132 190 145" fill="none" stroke="#55372e" stroke-width="4" stroke-linecap="round"/>
+<path d="M211 145 Q227 132 241 145" fill="none" stroke="#55372e" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="176" cy="161" rx="8" ry="12" fill="#49302a"/><ellipse cx="224" cy="161" rx="8" ry="12" fill="#49302a"/>
+<circle cx="179" cy="157" r="3" fill="#fff"/><circle cx="227" cy="157" r="3" fill="#fff"/>
+<ellipse cx="151" cy="180" rx="13" ry="7" fill="#ef9e9d" opacity=".5"/><ellipse cx="249" cy="180" rx="13" ry="7" fill="#ef9e9d" opacity=".5"/>
+<path d="M184 195 Q200 210 216 194" fill="none" stroke="#a94f60" stroke-width="4" stroke-linecap="round"/>
+<!-- front curls -->
+<path d="M126 122 Q129 65 177 64 Q146 89 153 124 Q139 147 130 173Z" fill="#5a372b"/>
+<path d="M273 116 Q268 72 232 65 Q259 93 248 121 Q263 147 270 170Z" fill="#5a372b"/>
+</svg>

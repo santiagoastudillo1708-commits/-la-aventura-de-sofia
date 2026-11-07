@@ -65,3 +65,36 @@
 .map-place span{font-size:2.7rem;line-height:1.15}.map-place b{font-size:1rem}.map-place small{font-size:.8rem;color:#89758f;text-align:center}
 .garden-place{grid-column:2/span 2}.forest-place{grid-column:4/span 2}.rainbow-place{grid-column:1/span 2}.tower-place{grid-column:3/span 2}.bath-place{grid-column:5/span 2}
 @media(max-width:600px){.progress-card{align-items:stretch;flex-direction:column}.progress-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.progress-stats div{min-width:0;padding:10px 5px}.kingdom-map{padding:18px 10px;gap:12px}.map-place{grid-column:span 3;min-height:120px;padding:10px 5px;border-radius:20px}.castle-place{grid-column:span 3}.garden-place{grid-column:1/span 3}.forest-place{grid-column:4/span 3}.rainbow-place{grid-column:span 3}.tower-place{grid-column:span 3}.bath-place{grid-column:span 3}.map-place span{font-size:2.35rem}.map-place b{font-size:.9rem}.map-place small{font-size:.75rem}}
+
+
+/* Vestidor V7: muñeca por capas y atelier adaptable */
+.wardrobe-layout{display:grid;grid-template-columns:minmax(280px,.92fr) minmax(320px,1.08fr);gap:20px;align-items:start;max-width:1000px;margin:0 auto 28px}
+.wardrobe-stage,.wardrobe-picker{background:#fff;border:1px solid #efdfef;border-radius:28px;padding:18px;box-shadow:var(--shadow)}
+.wardrobe-stage{position:sticky;top:12px;text-align:center;overflow:hidden;background:radial-gradient(circle at 50% 22%,#fff 0,#fff5fb 44%,#f0eaff 100%)}
+.wardrobe-sparkles{color:#d6a7d2;letter-spacing:.6em;font-size:1.15rem;margin:2px 0 8px}
+.doll-canvas{position:relative;width:min(100%,360px);aspect-ratio:400/700;margin:0 auto;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#fff9fd,#f8efff 72%,#fff3e7)}
+.doll-canvas img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.doll-canvas .doll-base{z-index:1}
+.doll-canvas .layer-dress{z-index:2}
+.doll-canvas .layer-hair{z-index:3}
+.doll-canvas .layer-gloves{z-index:4}
+.doll-canvas .layer-necklace{z-index:5}
+.doll-canvas .layer-earrings{z-index:6}
+.doll-canvas .layer-shoes{z-index:7}
+.doll-canvas .layer-tiara{z-index:8}
+.save-look-button{width:100%;max-width:320px;margin:14px auto 0}
+.wardrobe-picker h2{margin:3px 0 14px;color:#76518a}
+.wardrobe-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+.wardrobe-tab{border:1px solid #eadcf0;background:#fff8fd;color:#755580;border-radius:999px;padding:10px 13px;font-weight:900}
+.wardrobe-tab.selected{background:#f0e3fb;border-color:#b98bce;box-shadow:0 0 0 2px #b98bce26}
+.wardrobe-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.wardrobe-item{display:flex;align-items:center;gap:10px;min-height:66px;text-align:left;border:2px solid #f0e4f1;border-radius:17px;background:#fff;padding:10px;color:#674a80}
+.wardrobe-item span{font-size:1.65rem}.wardrobe-item b{font-size:.9rem}
+.wardrobe-item.selected{border-color:#bf8acb;background:#fbf0ff;box-shadow:0 0 0 2px #bf8acb20}
+.saved-looks-panel{margin-top:20px;padding-top:15px;border-top:1px solid #f0e4f1}
+.saved-looks-panel h3{margin:0 0 10px;color:#80568e}
+.saved-looks{display:flex;gap:9px;flex-wrap:wrap}
+.saved-look{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:105px;padding:10px;border:1px solid #eadcf0;border-radius:15px;background:#fff8fd;color:#76518a}
+.saved-look span{font-size:1.4rem}.saved-look small{color:#907c98}
+@media(max-width:760px){.wardrobe-layout{grid-template-columns:1fr}.wardrobe-stage{position:relative;top:auto}.doll-canvas{width:min(100%,320px)}.wardrobe-picker{padding:15px}}
+@media(max-width:390px){.wardrobe-tabs{gap:6px}.wardrobe-tab{padding:9px 10px;font-size:.82rem}.wardrobe-items{gap:7px}.wardrobe-item{padding:8px;min-height:60px}.wardrobe-item b{font-size:.82rem}}

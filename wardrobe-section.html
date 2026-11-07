@@ -1,0 +1,36 @@
+<section class="view" id="view-wardrobe">
+  <button class="back-link" data-view="adventure">← Volver a aventuras</button>
+  <div class="section-heading"><span class="eyebrow">EL ATELIER MÁGICO</span><h1>¡Vamos a crear un look! 👑</h1><p>Combina prendas y accesorios a tu manera. ¡Todas las mezclas son válidas!</p></div>
+  <div class="wardrobe-layout">
+    <div class="wardrobe-stage">
+      <div class="wardrobe-sparkles">✦ ✧ ✨ ✧ ✦</div>
+      <div class="doll-canvas" id="avatarDoll" aria-label="Muñeca de Sofía con prendas intercambiables">
+        <img class="doll-base" src="wardrobe/doll-base.svg" alt="Muñeca princesa de cuerpo completo"/>
+        <img class="doll-layer layer-dress" id="layer-dress" alt="Vestido"/>
+        <img class="doll-layer layer-hair" id="layer-hair" alt="Peinado"/>
+        <img class="doll-layer layer-gloves" id="layer-gloves" alt="Guantes"/>
+        <img class="doll-layer layer-necklace" id="layer-necklace" alt="Collar"/>
+        <img class="doll-layer layer-earrings" id="layer-earrings" alt="Aretes"/>
+        <img class="doll-layer layer-shoes" id="layer-shoes" alt="Zapatos"/>
+        <img class="doll-layer layer-tiara" id="layer-tiara" alt="Tiara"/>
+      </div>
+      <div class="outfit-label" id="outfitLabel">Vestido pétalo</div>
+      <button class="primary save-look-button" id="saveLook">💖 ¡Este es mi vestido!</button>
+      <div class="feedback" id="outfitFeedback" role="status">¡Vamos a crear algo precioso!</div>
+    </div>
+    <div class="wardrobe-picker">
+      <h2>Mi armario mágico</h2>
+      <div class="wardrobe-tabs" role="tablist" aria-label="Categorías de ropa">
+        <button class="wardrobe-tab selected" data-category="dress">👗 Vestidos</button>
+        <button class="wardrobe-tab" data-category="tiara">👑 Tiaras</button>
+        <button class="wardrobe-tab" data-category="hair">💇 Peinados</button>
+        <button class="wardrobe-tab" data-category="gloves">🧤 Guantes</button>
+        <button class="wardrobe-tab" data-category="necklace">📿 Collares</button>
+        <button class="wardrobe-tab" data-category="earrings">💎 Aretes</button>
+        <button class="wardrobe-tab" data-category="shoes">🩰 Zapatos</button>
+      </div>
+      <div class="wardrobe-items" id="wardrobeItems" aria-live="polite"></div>
+      <div class="saved-looks-panel"><h3>💗 Mis conjuntos favoritos</h3><div id="savedLooks" class="saved-looks"></div></div>
+    </div>
+  </div>
+</section>
